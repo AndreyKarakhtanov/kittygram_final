@@ -2,13 +2,18 @@
 import os
 from pathlib import Path
 
+from django.core.management.utils import get_random_secret_key  
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-cg6*%6d51ef8f#4!r3*$vmxm4)abgjw8mo!4y-q*uq1!4$-89$'
+SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 
-DEBUG = True
+if os.getenv('DEBUG', 'False') == 'False':
+    DEBUG = False
+else:
+    DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '89.169.161.238', 'nekogram.duckdns.org']
+ALLOWED_HOSTS = os.getenv('SERVERNAMES', '127.0.0.1 localhost').split(' ')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -96,7 +101,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+STATIC_ROOT = '/static/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/media/'
