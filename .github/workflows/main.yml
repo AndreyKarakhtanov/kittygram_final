@@ -163,4 +163,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ github.actor }} успешно выполнил деплой.
+        message: ${{ github.actor }} успешно выполнил деплой. Сообщение коммита (https://github.com/${{ github.repository }}/commit/${{ github.sha }}): ${{ github.event.commits[0].message }} 
